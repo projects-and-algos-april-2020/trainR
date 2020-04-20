@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class ="wrapper">
+        <h1>Your Suggestions</h1>
+        <a href="/logout">Logout</a>
+        <hr>
+        <a href ="/dashboard"><button>Home</button></a>
+
+        <h3>My Suggestions</h3>
+            {%for item in user_suggestion%}
+                {{item['suggestion']}}
+                <br><br>
+                <a href = "/suggestion/remove/{{item['id']}}">Remove</a>
+                <br><br>
+                {%endfor%}
+    </div>
+</body>
+</html>

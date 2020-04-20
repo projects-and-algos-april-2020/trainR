@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class = "wrapper">
+        <h1>Welcome back {{session['name']}}!</h1>
+        <a href="/logout">Logout</a>
+        <hr>
+        <a href ="/workout/new"><button>New Workout</button></a>
+        {%if session['user_id'] == 1%}
+        <a href ="/admin/dashboard"><button>Your Clients</button></a>
+        {%endif%}
+        <div class ="workouts">
+            <h3>My Workouts</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th># of Sets</th>
+                        <th># of Reps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for item in my_workout %}
+                        <tr>
+                            <td>{{item['name']}}</td>
+                            <td>{{item['set_num']}}</td>
+                            <td>{{item['rep']}}</td>
+                            <td><a href = "/workout/remove/{{item['id']}}">Remove</a>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+        <div class = "suggestion">
+            <form action = "/addsuggestion" method = "POST">
+                <textarea name ="text" rows = "10" cols ="20"> Enter a suggestion or comment for your trainer</textarea>
+                <br><br>
+                <input type = "submit">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

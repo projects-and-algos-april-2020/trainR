@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href ="{{url_for('static',filename='style.css')}}">
+    <title>User</title>
+</head>
+<body>
+    <div class ="wrapper">
+        <a href="/logout">Logout</a>
+        <a href = "/admin/dashboard">Back</a>
+        <hr>
+
+        <h3>{{user_info['first_name']}} {{user_info['last_name']}} Suggestions</h3>
+        {%for quote in user_suggestion %}
+            {%if quote['user_id'] == user_info['id']%}
+                <div class= "user_suggestion">
+                    <p>{{quote['suggestion']}} : </p>
+                </div> 
+            {%endif%}
+        {% endfor %}
+        <div class ="workouts">
+            <h4>{{user_info['first_name']}}'s Workouts</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th># of Sets</th>
+                        <th># of Reps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for item in user_workout %}
+                        {%if item['user_id'] == user_info['id']%}
+                            <tr>
+                                <td>{{item['name']}}</td>
+                                <td>{{item['set_num']}}</td>
+                                <td>{{item['rep']}}</td>
+                                <td><a href = "/workout/remove/{{item['id']}}">Remove</a>
+                            </tr>
+                        {%endif%}
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class ="wrapper">
+        <h1>Your Clients</h1>
+        <a href="/logout">Logout</a>
+        <hr>
+        <a href ="/dashboard"><button>Home</button></a>
+        <hr>
+            {%for names in all_user %}
+                {%if names['id']!=1%}
+                    <a href ="/admin/communications/{{names['id']}}">{{names['first_name']}} {{names['last_name']}}</a>
+                    <br><br>
+                {%endif%}
+            {%endfor%}
+    </div>
+</body>
+</html>
